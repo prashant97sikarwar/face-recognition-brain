@@ -38,6 +38,8 @@ class App extends Component {
     }
   }
 
+
+
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box
     const image = document.getElementById('inputimage');
@@ -51,6 +53,11 @@ class App extends Component {
 
     }
     
+  }
+  componentDidMount(){
+    fetch('http://localhost:3000')
+    .then(response => response.json())
+    .then(console.log);
   }
 
   displayFaceBox = (box) => {
@@ -68,7 +75,6 @@ class App extends Component {
       this.state.input)
     .then(response=> this.displayFaceBox(this.calculateFaceLocation(response)))
     .catch(err => console.log(err));
-
   }
 
   onRouteChange = (route)=> {
